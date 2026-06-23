@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: dolphin-ai-backend
+    runtime: node
+    plan: free
+    buildCommand: pnpm install && pnpm run build
+    # Note: no --env-file here. On Render, env vars come from the dashboard / envVars below.
+    startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # PORT is provided automatically by Render — do not set it manually.
+      - key: SESSION_SECRET
+        generateValue: true
+      # Not used by current code, but set it so it's ready when the db layer is added.
+      # Paste your Render database's INTERNAL connection string in the dashboard.
+      - key: DATABASE_URL
+        sync: false
