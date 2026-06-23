@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.tsbuildinfo
+*.tsbuildinfo
+
+# Secrets — never commit
+!.env.example
+config.bat
